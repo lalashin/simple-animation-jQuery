@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple-animation-jQuery</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body class="parallax">
+    <!-- info -->
+    <div class="paraScroll">scrollTop() : <span>0</span>px</div>
+    <!-- //info -->
+
+    <!-- //header -->
+
+    <!-- nav -->
+    <nav class="paraDot">
+        <ul>
+            <li class="active"><a href="#section1"><span class="mo">..from-left-to-right#1</span></a></li>
+            <li><a href="#section2"><span class="mo">..to up</span></a></li>
+            <li><a href="#section3"><span class="mo">..scale</span></a></li>
+            <li><a href="#section4"><span class="mo">..to up</span></a></li>
+            <!-- <li><a href="#section5"><span class="mo">..</span></a></li>
+            <li><a href="#section6"><span class="mo">..</span></a></li>
+            <li><a href="#section7"><span class="mo">..</span></a></li>
+            <li><a href="#section8"><span class="mo">..</span></a></li>
+            <li><a href="#section9"><span class="mo">..</span></a></li> -->
+        </ul>
+    </nav>
+    <!-- //nav -->
+
+    <div id="paraCont">
+        <div id="section1" class="content__item">
+            <div class="cont_wrap ani1">
+                <div class="content__step">
+                    <div class="step1">1</div>
+                    <div class="step1">2</div>
+                    <div class="step1">3</div>
+                    <div class="step1">4</div>
+                    <div class="step1">5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- //section1 -->
+
+        <div id="section2" class="content__item">
+            <div class="cont_wrap ani2">
+                <div class="content__step">
+                    <div class="step1">1</div>
+                    <div class="step1">4</div>
+                    <div class="step1">2</div>
+                    <div class="step1">4</div>
+                    <div class="step1">3</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- //section2 -->
+
+        <div id="section3" class="content__item">
+            <div class="cont_wrap ani3">
+                <div class="content__step ani33">
+                    <div class="step1">1</div>
+                    <div class="step1">2</div>
+                    <div class="step1">3</div>
+                    <div class="step1">4</div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //section3 -->
+
+        <div id="section4" class="content__item">
+            <div class="cont_wrap ani4">
+                <div class="content__step ani44">
+                    <div class="step1">1</div>
+                    <div class="step1">2</div>
+                    <div class="step1">3</div>
+                    <div class="step1">4</div>
+                    <div class="step1">5</div>
+                    <div class="step1">6</div>
+                    <div class="step1">7</div>
+                    <div class="step1">8</div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //section4 -->
+
+
+
+
+    </div>
+    <!-- //main -->
+
+
+
+<!-- //script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="js/lightbox.js"></script>
+<script>
+
+    $(".paraDot ul li").click(function(e){
+        e.preventDefault();
+        let target = $(this);
+        let index= target.index();
+        let section = $(".content__item").eq(index);
+        let offset = section.offset().top;
+        $("html, body").animate({scrollTop:offset},400,"easeInOutCirc");
+    });
+
+
+    $(window).scroll(function(){
+        let scrollTop = $(window).scrollTop() + $(window).height()/2;
+
+        //each()
+        $(".content__item").each(function(index){
+           // console.log(index);
+           if( scrollTop > $(this).offset().top -2 ) {
+                $(this).addClass("show");
+
+                $(".paraNav ul li").eq(index).addClass("active").siblings().removeClass("active");
+           }
+           else {
+                $(this).removeClass("show");
+           }
+        });
+
+        //출력
+        $(".paraScroll span").text(parseInt(scrollTop));
+    })
+
+
+</script>
+</body>
+
+</html>
